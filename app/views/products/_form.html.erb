@@ -1,0 +1,71 @@
+
+<section class="vh-80 glass">
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-9 col-lg-6 col-xl-4">
+            <%= image_tag('img/cart.webp', class: 'img-fluid')%>
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <%= form_with model: @product do |x|%>
+          <form>
+            <div class="divider d-flex align-items-center my-4">
+              <p class="text-center fw-bold mx-3 mb-0">Add Product</p>
+            </div>
+            <div class="form-outline mb-4">
+                <%= x.text_field :name, type: "text", class: "form-control form-control-lg",
+                placeholder: "Product Name"%>
+              <% if @product.errors.any? %>
+              <div class="text">
+                  <% @product.errors.full_messages_for(:name).each do |message| %>
+                      <div class="text-danger"><%= message %></div>
+                  <% end %>
+              </div>
+              <% end %>
+            </div>
+            <div class="form-outline mb-4">
+                <%= x.file_field :image, class: "form-control form-control-lg",
+                placeholder: "Product Image"%>
+            </div>
+            <%= x.number_field :user_id, value: current_user.id,id: 'product_user_id', type: :hidden,class: 'form-control'%>
+            <div class="form-outline mb-3">
+                <%= x.number_field :oriprice, type: "text", class: "form-control form-control-lg",
+                placeholder: "Original Price"%>
+
+            </div>
+            <div class="form-outline mb-3">
+                <%= x.number_field :disprice, type: "text", class: "form-control form-control-lg",
+                placeholder: "Discount Price"%>
+                <% if @product.errors.any? %>
+                <div class="text">
+                    <% @product.errors.full_messages_for(:disprice).each do |message|%>
+                    <div class="text-danger"><%= message%></div>
+                    <% end %>
+                </div>
+              <% end %>
+            </div>
+            <div class="form-outline mb-3">
+                <%= x.number_field :brand, type: "text", class: "form-control form-control-lg",
+                placeholder: "Brand"%>
+                <% if @product.errors.any? %>
+                <div class="text">
+                    <% @product.errors.full_messages_for(:brand).each do |message|%>
+                    <div class="text-danger"><%= message%></div>
+                    <% end %>
+                </div>
+              <% end %>
+            </div>
+            <div class="form-outline mb-3 " >
+              <%= x.select :category, options_for_select([["Women's Fashion", 1], ["Men's Fashion", 2], ['Electronics', 3], ['Other', 4], ['Select Category', 5]], selected: 5), {}, class: 'custom-dropdown' %>
+            </div>
+            <div class="text-center text-lg-start mt-4 pt-2">
+                <%= x.submit class: "btn btn-primary btn-lg w-100",
+                style: "padding-left: 2.5rem; padding-right: 2.5rem;"%>
+                <%= link_to 'Go Back', root_path, class: 'btn btn-outline-primary w-100 mt-2'%>
+            </div>
+  
+          </form>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </section>

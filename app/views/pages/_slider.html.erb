@@ -1,0 +1,50 @@
+<style>
+    .logos{
+    display: flex;
+    overflow: hidden;
+    background-color: white;
+    }
+    .logos-slide{
+    white-space: nowrap;
+    display: inline-block;
+    animation: 5s slide infinite linear;
+    }
+    .logos-slide img{
+    width: 200px; 
+    margin: 0px 40px;
+    }
+    @keyframes slide{
+    from{
+    transform: translateX(0%);
+    } to{
+    transform: translateX(-100%);
+    }
+    }
+    .logos:hover .logos-slide{
+    animation-play-state: paused;
+    }
+</style>
+<section class="ftco-section ftco-no-pt ftco-no-pb mt-5 p-4">
+    <div class="logos">
+        <div class="logos-slide">
+            <%= image_tag('img/3m.svg')%>
+            <%= image_tag('img/barstool-store.svg')%>
+            <%= image_tag('img/budweiser.svg')%>
+            <%= image_tag('img/buzzfeed.svg')%>
+            <%= image_tag('img/forbes.svg')%>
+            <%= image_tag('img/macys.svg')%>
+            <%= image_tag('img/menshealth.svg')%>
+            <%= image_tag('img/mrbeast.svg')%>
+        </div>
+        <div class="logos-slide">
+            <%= image_tag('img/3m.svg')%>
+            <%= image_tag('img/barstool-store.svg')%>
+            <%= image_tag('img/budweiser.svg')%>
+            <%= image_tag('img/buzzfeed.svg')%>
+            <%= image_tag('img/forbes.svg')%>
+            <%= image_tag('img/macys.svg')%>
+            <%= image_tag('img/menshealth.svg')%>
+            <%= image_tag('img/mrbeast.svg')%>
+        </div>
+      </div>
+</section>  

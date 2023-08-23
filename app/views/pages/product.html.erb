@@ -1,0 +1,81 @@
+
+<% items = [
+["User", admin_path],
+["Product", admin_product_path]
+]%>
+<div class="header-body container mt-5">
+    <div class="row align-items-end">
+      <div class="col">
+        <h6 class="header-pretitle text-muted text-uppercase">
+          Overview
+        </h6>
+        <h1 class="header-title fw-bold">
+          Dashboard
+        </h1>
+      </div>
+      <div class="col-auto">
+
+        <%= select_tag "Select", options_for_select(items, request.path), onchange: "Turbo.visit(this.selectedOptions[0].value)", class: 'custom-dropdown' %>
+      </div>
+    </div> 
+  </div>
+  <div class="container mt-5">
+  <div class="row">
+      <div class="col-12 col-xl-8">
+        <%= line_chart Product.group_by_day(:created_at, range: 1.month.ago...Time.now).count %>
+        <p class="text-center fw-bold">New Products</p>
+      </div>
+      <div class="col-12 col-xl-4">
+        <%= pie_chart Product.group_by_day(:created_at).count %>
+        <p class="text-center fw-bold mt-2">Product Added(by day)</p>
+      </div>
+  </div>
+</div>
+
+<% if @product.count > 0 %>
+<h1 class="text-center mt-5 fw-bold">All Products</h1>
+<div class="container mt-5">
+  <table class="table align-middle mb-4 bg-white">
+    <thead class="bg-light">
+      <tr>
+        <th>Name</th>
+        <th>Added</th>
+        <th>Original Price</th>
+        <th>Added By</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @product.each do |x| %>
+        <tr>
+          <td>
+            <div class="d-flex align-items-center">
+              <% if x.image.attached? %>
+                <%= image_tag(x.image,style: "width: 45px; height: 45px",class: "rounded-circle")%>
+              <% else%>
+                <%= image_tag('img/bg.jpg',style: "width: 45px; height: 45px",class: "rounded-circle")%>   
+              <% end %>
+              <div class="ms-3">
+                <p class="text-muted mb-0"><%= x.name %></p>
+              </div>
+            </div>
+          </td>
+          <td>
+            <p class="text-muted mb-0 "><%= time_ago_in_words(x.created_at) + ' ago'%></p>
+          </td>
+          <td>
+            <span class=""><%= x.oriprice%></span>
+          </td>
+          <td><%= x.user.email %></td>
+          <td>
+            <%= button_to product_path(x.id), method: :delete, class:'btn btn-danger' do%>
+            <i class="fa fa-lg fa-trash"></i>
+            <% end %>  
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% else %>
+<% end %>

@@ -1,0 +1,27 @@
+<% if @product.comments.count <= 0%>
+<% else %>
+  <div class="container d-flex justify-content-center mt-4 mb-100 shadow">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Recent Reviews</h4>
+                    <h6 class="card-subtitle">Latest Reviews by users</h6> </div>
+                    <% @comment.each do |x|%>
+                    <div class="comment-widgets m-b-20">
+                    <div class="d-flex flex-row comment-row">
+                        <div class="p-2"><span class="round">
+                        <div class="comment-text w-100">
+                            <h6><%= x.user.email %>  |   Commented <%= time_ago_in_words(x.created_at) + ' ago'%></h6>
+                            <h5><%= x.title %></h5>
+
+                            <p class="m-b-5 m-t-10 text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it</p>
+                        </div>
+                        <%= button_to 'Delete', [x.product, x], class: 'btn btn-danger btn-sm ',method: :delete, data: {'turbo-method': :delete}, data: { turbo: "false" } if x.user_id == current_user.id%>
+                    </div>
+        </div>
+            </div>
+          <% end %>
+  </div>
+<% end %>

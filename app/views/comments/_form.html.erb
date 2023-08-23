@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="modal-header p-3 pb-4 border-bottom-0">
+        <h4 class="card-title fw-bold">Leave Review</h4>
+    </div>
+        <%= form_for([@product, @product.comments.build]) do |f| %>
+    <div class="modal-body p-3 pt-0">
+    <form class="">
+        <div class="form-floating mb-3">
+        <%= f.text_field :title, class: 'form-control'%> 
+        <label for="floatingInput" style="opacity: 0.2;">Commenting as <%= current_user.email%></label>
+        </div>
+        <%= f.submit  data: { turbo: "false" }, class: ' btn btn-primary '%>
+    </form>
+    <% end %>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+   <% if @cart.orderables.count > 0 %>
+   <h3 class="title text-center mt-3 border-bottom p-3 fw-bold"><%= current_user.email.split('@')[0]%>'s Cart</h3>
+   <div class="text my-1">
+    <%= render 'cart/orderables'%>
+      </div>
+      <div class="container ">
+        </div>
+    <% else %>
+        <%= render 'cart/emptycart' %>
+  <% end %>
+<br>
+

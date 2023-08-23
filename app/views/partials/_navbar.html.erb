@@ -1,0 +1,26 @@
+<ul style="margin: 0" >
+    <div class="logo">
+        <%= link_to image_tag('img/logo.png', width: '120px'), root_path %>
+    </div>
+    <div class="right">
+        <li><%= link_to 'Products', products_path, class: 'rm'  if @product != nil?%></li>
+        <li><%= link_to 'About', about_path, class: 'rm'%></li>
+        <% if user_signed_in? %>
+            <% if current_user.admin? %>
+                <li><%= link_to 'Admin', admin_path, class: 'rm'%></li>
+            <% end %>
+            <li><%= link_to  current_user.email, edit_user_registration_path, class: 'rm' %></li>
+            <%= link_to cart_path, class: 'position-relative white' do%>
+            <i class="fa fa-lg fa-shopping-cart"></i>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <%= @cart.orderables.count%>
+                <span class="visually-hidden">unread messages</span>
+              </span>
+          <% end %>
+            <%= button_to 'Logout',destroy_user_session_path,class:'rm btnt text-white',method: :delete%>
+        <% else %>
+        <li><%= link_to 'Login', new_user_session_path, class: 'rm'%></li>
+        <li><%= link_to 'Signup', new_user_registration_path, class: 'rm'%></li>
+        <% end %>
+    </div>
+</ul>
