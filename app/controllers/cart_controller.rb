@@ -18,7 +18,7 @@ class CartController < ApplicationController
       product_name = @product.name
       product_price = @product.disprice
       update_lcd(product_name, product_price)
-      send_serial_command('1') # Send command to Arduino to trigger LED blinking
+      send_serial_command('1')
 
       redirect_to cart_path, notice: 'Added to cart'
       return

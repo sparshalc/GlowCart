@@ -42,6 +42,7 @@
         <th>Added</th>
         <th>Original Price</th>
         <th>Added By</th>
+        <th>Comment Count</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -67,6 +68,7 @@
             <span class=""><%= x.oriprice%></span>
           </td>
           <td><%= x.user.email %></td>
+          <td><%= x.comments.count > 0 ?  x.comments.count  : "No" %> comments</td>
           <td>
             <%= button_to product_path(x.id), method: :delete, class:'btn btn-danger' do%>
             <i class="fa fa-lg fa-trash"></i>

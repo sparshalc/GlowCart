@@ -43,6 +43,7 @@
         <th>Role</th>
         <th>Actions</th>
         <th>Active Status</th>
+        <th>Comments</th>
       </tr>
     </thead>
     <tbody>
@@ -68,6 +69,9 @@
           </td>
           <td>
             <div><b> <%= time_ago_in_words(x.last_seen_at) == time_ago_in_words(Time.now)  ? "Active Now" : "Not Active" %></div>
+          </td>
+          <td>
+            <%= x.comments.count > 0 ?  x.comments.count  : "No" %> comments
           </td>
         </tr>
       <% end %>
